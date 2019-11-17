@@ -265,7 +265,7 @@ if __name__=="__main__":
 
     result=translate(input_word_list_original,input_word_label)
     if (len(result)==0):
-        
+
     for i in range(len(result)):
         print("识别到实体 "+result[i]['word']+" 类型为"+result[i]['type'])
 
