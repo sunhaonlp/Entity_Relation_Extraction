@@ -1,0 +1,2 @@
+Chinesenre：
+训练完后，首先在origin的test.txt里面输入要测试的句子，之后运行deal_test.py来生成pkl文件，再运行chinesenre下面的test.py来对这个生成的句子进行预测
