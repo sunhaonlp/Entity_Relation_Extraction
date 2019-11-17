@@ -33,7 +33,7 @@ with codecs.open('train.txt','r','utf-8') as tfc:
         num[3] = 43
         num[4] = 76
 
-        if count[relation2id[line[2]]] <num[relation2id[line[2]]]*0.8:
+        if count[relation2id[line[2]]] <num[relation2id[line[2]]]*0.9:
             sentence = []
             index1 = line[3].index(line[0])   # 找出第一个实体在句子的位置
             position1 = []
@@ -154,14 +154,14 @@ count = [0,0,0,0,0]
 with codecs.open('train.txt','r','utf-8') as tfc:
     for lines in tfc:
         line = lines.split()
-        # 其实是在划分数据集，每个关系的第1500到1800笔是测试数据
+        # 其实是在划分数据集
         num=[0,0,0,0,0]
         num[0] = 48
         num[1] = 32
         num[2] = 78
         num[3] = 43
         num[4] = 76
-        if count[relation2id[line[2]]] >=0.8*num[relation2id[line[2]]]:
+        if count[relation2id[line[2]]] >=0.9*num[relation2id[line[2]]]:
             sentence = []
             index1 = line[3].index(line[0])
             position1 = []

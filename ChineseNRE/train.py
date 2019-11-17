@@ -175,5 +175,5 @@ for epoch in range(EPOCHS):
         torch.save(model, model_name)
         print(model_name, "has been saved")
 
-torch.save(model, "model/model_01.pkl")
+torch.save(model, "model/model_nre.pkl")
 print("model has been saved")
