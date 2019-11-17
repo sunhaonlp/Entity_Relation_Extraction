@@ -62,25 +62,25 @@ embedding_pre = []
 
 
 # 使用预训练的词向量进行训练
-if len(sys.argv) == 2 and sys.argv[1] == "pretrained":
-    print("use pretrained embedding")
-    config["pretrained"] = True
-    word2vec = {}
-    with codecs.open('vec.txt', 'r', 'utf-8') as input_data:
-        for line in input_data.readlines():
-            word2vec[line.split()[0]] = map(eval, line.split()[1:])
+# if len(sys.argv) == 2 and sys.argv[1] == "pretrained":
+print("use pretrained embedding")
+config["pretrained"] = True
+word2vec = {}
+with codecs.open('vec.txt', 'r', 'utf-8') as input_data:
+    for line in input_data.readlines():
+        word2vec[line.split()[0]] = map(eval, line.split()[1:])
 
-    unknow_pre = []
-    unknow_pre.extend([1] * 100)
-    embedding_pre.append(unknow_pre)  # wordvec id 0
-    for word in word2id:
-        if word in word2vec:
-            embedding_pre.append(word2vec[word])
-        else:
-            embedding_pre.append(unknow_pre)
+unknow_pre = []
+unknow_pre.extend([1] * 100)
+embedding_pre.append(unknow_pre)  # wordvec id 0
+for word in word2id:
+    if word in word2vec:
+        embedding_pre.append(word2vec[word])
+    else:
+        embedding_pre.append(unknow_pre)
 
-    embedding_pre = np.asarray(embedding_pre)
-    print(embedding_pre.shape)
+embedding_pre = np.asarray(embedding_pre)
+print(embedding_pre.shape)
 
 
 # 若不使用预训练的词向量，则在下面会使用随机初始化的vec
