@@ -183,7 +183,7 @@ if __name__=="__main__":
     optimizer = AdamW(optimizer_grouped_parameters, lr=args.learning_rate, eps=args.adam_epsilon)
     scheduler = WarmupLinearSchedule(optimizer, warmup_steps=args.warmup_steps, t_total=t_total)
 
-    model.load_state_dict(torch.load("model/model_epoch0.pkl"))
+    # model.load_state_dict(torch.load("model/model_epoch0.pkl"))
 
     # 多GPU
     if n_gpu>1:
