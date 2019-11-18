@@ -1,3 +1,5 @@
+import heapq
+
 from transformers import BertTokenizer
 from transformers import BertForTokenClassification
 from transformers import BertConfig
@@ -230,7 +232,7 @@ if __name__=="__main__":
     test_sampler = SequentialSampler(test_data)
     test_dataloader = DataLoader(test_data, sampler=test_sampler, batch_size=args.test_batch_size)
     # 定义模型
-    print("load config from: {}".format(os.path.join(BERT_HOME, "bert_config.json")))
+    # print("load config from: {}".format(os.path.join(BERT_HOME, "bert_config.json")))
     config = BertConfig.from_pretrained(os.path.join(BERT_HOME, "bert_config.json"), num_labels=13)
     model = BertForTokenClassification.from_pretrained(BERT_HOME, config=config)
     model.to(device)
@@ -274,6 +276,7 @@ if __name__=="__main__":
     if(len(result)>1):
         pass
     else:
+        print("未检测到关系！")
         sys.exit(1)
 
     i = 0
@@ -281,32 +284,32 @@ if __name__=="__main__":
     while(i<len(result)):
         # 提取出所有企业对
         if(result[i]['type']=='company'):
-            ii=i+1
-            while(ii<len(result)):
+            ii=0
+            while(ii<len(result) and ii!=i):
                 if(result[ii]['type']=='company'):
                     entity_pair.append([result[i]['word'],result[ii]['word']])
                 ii+=1
 
         # 提取出所有企业-产品对
         if(result[i]['type']=='product'):
-            ii = i+1
-            while (ii < len(result)):
+            ii = 0
+            while (ii < len(result) and ii!=i):
                 if (result[ii]['type'] == 'company'):
                     entity_pair.append([result[ii]['word'], result[i]['word']])
                 ii += 1
 
         # 提取出所有企业-有关部门对
         if (result[i]['type'] == 'department'):
-            ii = i+1
-            while (ii < len(result)):
+            ii = 0
+            while (ii < len(result) and ii!=i):
                 if (result[ii]['type'] == 'company'):
                     entity_pair.append([result[ii]['word'], result[i]['word']])
                 ii += 1
 
         # 提取出所有企业-人物对
         if (result[i]['type'] == 'people'):
-            ii = i+1
-            while (ii < len(result)):
+            ii = 0
+            while (ii < len(result) and ii!=i):
                 if (result[ii]['type']== 'company'):
                     entity_pair.append([result[ii]['word'], result[i]['word']])
                 ii += 1
@@ -328,7 +331,7 @@ if __name__=="__main__":
         for line in input_data.readlines():
             relation2id[line.split()[0]] = int(line.split()[1])
         input_data.close()
-
+    status = 0 # 存储实体间是否存在关系
     for i in range(len(entity_pair)):
         # 处理数据，将实体1、实体2与每个词的相对位置找出来，并把标签和句子本身存起来
         datas = deque()
@@ -477,8 +480,11 @@ if __name__=="__main__":
             tmp = tmp.tolist()
             prob = tmp[0]  # tmp是每种预测结果的可能性
             y = np.argmax(y.data.numpy(), axis=1)
-            # re1 = list(map(tmp.index, heapq.nlargest(5, tmp)))
-            yy=y.tolist()[0]
-        if(prob[yy]>0.5):
-            print(line[0]+" 与 "+line[1]+" 之间的关系为"+id2relation[yy]+"的概率为"+str(prob[yy]))
+            re1 = list(map(prob.index, heapq.nlargest(2, prob)))
+        for i in range(len(re1)):
+            if(prob[re1[i]]>0.3):
+                status = 1
+                print(line[0]+" 与 "+line[1]+" 之间的关系为"+id2relation[re1[i]]+"的概率为"+str(prob[re1[i]]))
 
+    if(status==0):
+        print("未检测到关系！")
