@@ -176,6 +176,10 @@ if __name__=="__main__":
     # 定义可见的cuda设备
     # 数据读入部分
     sentence = input("请输入你想预测的句子：")
+    line = sentence.strip()  # 去掉每行头尾空白
+    tmp = filter(lambda ch: ch not in ' \t1234567890\'\'\"', line)  # 去掉特殊符号
+    tmp_tmp = list(tmp)
+    sentence = ''.join(tmp_tmp)
     dict_bert = {}
     dict_bert['entity-mentions'] = []
     dict_bert['sentence'] = sentence
