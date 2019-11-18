@@ -18,7 +18,7 @@
 
 运行截图：
 
-![TIM图片20191118155833](https://github.com/1024642475/Entity_Relation_Extraction/blob/master/TIM图片20191118155833.png)
+![TIM图片20191118155833](https://github.com/1024642475/Entity_Relation_Extraction/blob/masr/demo_photo.png)
 
 # 第二阶段 关系抽取
 
