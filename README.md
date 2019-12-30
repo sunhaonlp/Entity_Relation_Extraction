@@ -74,3 +74,7 @@ http://47.107.71.42:8000/dataset/entity.zip
 下载地址：
 http://47.107.71.42:8000/dataset/relation.zip
 
+
+## 预训练模型：
+下载地址：
+http://47.107.71.42:8000/model
