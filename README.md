@@ -64,17 +64,16 @@
     "sentence": "征信中心回应不对数据真实性负责国家企业信用信息公示系统显示，四川新网银行股份有限公司成立于年，住所位于中国（四川）自由贸易试验区成都高新区，注册资金亿元"
 }
 ```
-下载地址：
-http://47.107.71.42:8000/dataset/entity.zip
+链接：https://pan.baidu.com/s/1GJoAlkgogWmPxB_ZEQ_qPA 
+提取码：d1b3 
 
 ## 关系数据集示例：
 
     上海市工商局  拼多多平台   监管  其后，国家市场监督管理总局网监司高度重视媒体反映的拼多多平台上销售侵权假冒商品等问题，已经要求上海市工商局约谈平台经营者
 
-下载地址：
-http://47.107.71.42:8000/dataset/relation.zip
-
+链接：https://pan.baidu.com/s/1qkI2WPLOllp7gUKhZ0nL_A 
+提取码：zgwc 
 
 ## 预训练模型：
-下载地址：
-http://47.107.71.42:8000/model
+链接：https://pan.baidu.com/s/1LAP65tdRX6MuMzhw9nsYMg 
+提取码：3lgw 
